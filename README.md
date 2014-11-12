@@ -102,3 +102,7 @@ Installation
 
 
 
+Contributing
+------------
+
+Forks, patches and other feedback are welcome.
