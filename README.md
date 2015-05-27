@@ -99,6 +99,17 @@ service rsyslog restart
 3) wait until the zabbix discovery is executed and see how the fields appear and get populated
 
 
+Troubleshooting
+---------------
+
+1) Make sure the log file '/var/log/rsyslogd-impstats.log' is formated in JSON. Disable other rsyslog configuration that you may have. Impstats wants to be loaded earlie to function properly.
+
+Reference [impstats documentation](http://www.rsyslog.com/doc/v8-stable/configuration/modules/impstats.html)
+```
+Caveats/Known Bugs
+This module MUST be loaded right at the top of rsyslog.conf, otherwise stats may not get turned on in all places.
+```
+
 
 Contributing
 ------------
