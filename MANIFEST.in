@@ -1,0 +1,6 @@
+recursive-include zabbix_rsyslog
+include README.md
+include rsyslogdiscovery.conf
+include 10-impstats.conf
+include rsyslogd-impstats
+
