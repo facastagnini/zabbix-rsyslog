@@ -7,12 +7,14 @@ import re
 import json
 import sys
 import argparse
+import subprocess
 
 log = "/var/log/rsyslogd-impstats.log"
 pid_file = '/var/run/rsyslog-impstats.pid'
 
 def tail(f, n):
-	stdin,stdout = os.popen2("tail -n "+n+" "+f+" | awk -F': ' '{print $2}'")
+        process = subprocess.Popen(("tail -n "+n+" "+f+" | awk -F': ' '{print $2}'"), shell=True, bufsize=0, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+	stdin,stdout = (process.stdin, process.stdout)
 	stdin.close()
 	lines = stdout.readlines(); stdout.close()
 	return lines
@@ -22,7 +24,7 @@ def print_discovery_json(tag, values):
 	tmp = []
 	for value in values:
 		tmp.append({tag: value})
-	
+
 	# python to json
 	zabbix_str = dict(data=tmp)
 	json_str = json.dumps(zabbix_str)
@@ -41,8 +43,8 @@ def run_discovery(filter):
 	names = list(set(names))
 	#print names
 	print_discovery_json("{#ITEMNAME}", names)
-        
-        
+
+
 def clean_name(name):
 	return re.sub('[\[\]\(\)\*: ]', '_', name)
 
@@ -52,7 +54,7 @@ def process_impstats_json():
 		fd = open('/tmp/testrsyslogomoutput.txt', 'a')
 		fd.write("Opened logfile\n")
 		fd.flush()
-        	
+
 	while True:
 		line = sys.stdin.readline()
 		if not line:
@@ -62,7 +64,7 @@ def process_impstats_json():
 			fd.write("Received: %s" % (line))
 			fd.flush()
 		json_object = json.loads(line)
-                
+
 		# send to zabbix
 		name = clean_name(json_object['name'])
 		del json_object['name']
@@ -75,18 +77,18 @@ def process_impstats_json():
 				fd.flush()
 	if debug:
 		fd.close()
-        
+
 
 def main():
-	global debug 
+	global debug
 	debug = False
-	
+
 	parser = argparse.ArgumentParser(usage='%(prog)s [--discover queue|action]')
 	parser = argparse.ArgumentParser(description='Helper script to link syslog stats and zabbix.')
 	parser.add_argument("--discover", action="store", help="Discover the rsyslog items in this system")
-	
+
 	args = parser.parse_args()
-	
+
 	if args.discover == "queue":
 		run_discovery("enqueued")
 	elif args.discover == "action":
@@ -96,7 +98,7 @@ def main():
 	else:
 		# if there is no discovery, start parsing the syslog input.
 		process_impstats_json()
-		
+
 	sys.exit(0)
 
 
