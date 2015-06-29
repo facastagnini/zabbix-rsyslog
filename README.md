@@ -18,7 +18,7 @@ This tutorial assumes you have a zabbix server up and running.
 Installation
 ------------
 
-1) Import the zabbix template and add it to all the nodes running rsyslog.
+1) Import the [zabbix template](zbx_rsyslog_stats_template.xml) and add it to all the nodes running rsyslog.
 
 2) With you favorite management tool, perform this actions on each server running rsyslog.
 
@@ -102,7 +102,8 @@ service rsyslog restart
 Troubleshooting
 ---------------
 
-1) Make sure the log file '/var/log/rsyslogd-impstats.log' is formated in JSON. Disable other rsyslog configuration that you may have. Impstats wants to be loaded earlie to function properly.
+1) Make sure the log file '/var/log/rsyslogd-impstats.log' is formated in JSON.
+2) Disable other rsyslog configuration that you may have, impstats wants to be loaded earlie to function properly.
 
 Reference [impstats documentation](http://www.rsyslog.com/doc/v8-stable/configuration/modules/impstats.html)
 ```
