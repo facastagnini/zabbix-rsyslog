@@ -31,7 +31,7 @@ def print_discovery_json(tag, values):
 
 def run_discovery(filter):
 	names = []
-	for line in tail(log,"30"):
+	for line in tail(log,"500"):
 		json_object = json.loads(line)
 		try:
 			if json_object[filter] is not None:

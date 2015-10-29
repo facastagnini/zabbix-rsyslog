@@ -3,8 +3,8 @@
 %define module_name zabbix_rsyslog 
 
 Name:           %{module_name}
-Version:        1.0.0
-Release:        4
+Version:        1.0.1
+Release:        1
 Group:          Applications/System
 Summary:        Send rsyslog queue stats to Zabbix
 
@@ -14,7 +14,7 @@ Source0:        %{module_name}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python-setuptools
-Requires:       python-setuptools rsyslog
+Requires:       python-setuptools rsyslog python-argparse
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %description
@@ -41,5 +41,12 @@ rm -rf $RPM_BUILD_ROOT
 %config %{_sysconfdir}/zabbix_agentd.d/rsyslogdiscovery.conf
 
 %changelog
+* Thu Oct 29 2015 Micah Yoder
+- Increase rsyslog queue size to 100000 from 1000
+- Increase tail analysis from 30 to 500
+
+* Wed Jun 17 2015 Micah Yoder
+- Add argparse dependency
+
 * Wed Jun 10 2015  Micah Yoder
 - Initial spec
