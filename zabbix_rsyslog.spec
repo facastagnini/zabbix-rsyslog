@@ -3,7 +3,7 @@
 %define module_name zabbix_rsyslog 
 
 Name:           %{module_name}
-Version:        1.0.1
+Version:        1.0.2
 Release:        1
 Group:          Applications/System
 Summary:        Send rsyslog queue stats to Zabbix
