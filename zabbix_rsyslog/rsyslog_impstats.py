@@ -66,13 +66,16 @@ def process_impstats_json():
 		# send to zabbix
 		name = clean_name(json_object['name'])
 		del json_object['name']
+
+		items_to_send = []
 		for key in json_object:
-			cmd = 'zabbix_sender -c /etc/zabbix/zabbix_agentd.conf --key rsyslog["%s",%s] --value %s' % (name,key, json_object[key])
-			retvalue = os.system(cmd)
-			if debug:
-				fd.write("command: %s\n" % (cmd))
-				fd.write("exit status: %s\n\n" % (retvalue))
-				fd.flush()
+			items_to_send.append('- rsyslog[{0},{1}] {2}'.format(name, key, json_object[key]))
+		cmd = "echo '{0}' | zabbix_sender -i - -c /etc/zabbix/zabbix_agentd.conf".format('\n'.join(items_to_send))
+		retvalue = os.system(cmd)
+		if debug:
+			fd.write("command: %s\n" % (cmd))
+			fd.write("exit status: %s\n\n" % (retvalue))
+			fd.flush()
 	if debug:
 		fd.close()
         
