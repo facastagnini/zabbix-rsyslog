@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     setup(
         name = NAME,
-        version = "1.0.1",
+        version = "1.0.2",
         author = "facastagnini",
         author_email = "",
         url = "https://github.com/facastagnini/zabbix-rsyslog",
