@@ -1,3 +1,7 @@
+"""
+setup.py
+"""
+
 from setuptools import setup
 from sys import path
 
@@ -22,7 +26,8 @@ if __name__ == "__main__":
         description = "Send rsyslog impstats output to zabbix",
 
         entry_points={
-            'console_scripts': [ 'rsyslog-impstats.py = zabbix_rsyslog.rsyslog_impstats:main' ],
+            'console_scripts': [ 
+                'rsyslog-impstats.py = zabbix_rsyslog.rsyslog_impstats:main' ],
         }
     )
 

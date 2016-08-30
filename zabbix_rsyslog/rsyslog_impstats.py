@@ -1,6 +1,8 @@
 #!/usr/bin/python -u
 # -*- coding: utf-8 -*-
-# File managed by puppet
+"""
+Send rsyslog impstats output to zabbix
+"""
 
 import os
 import re
