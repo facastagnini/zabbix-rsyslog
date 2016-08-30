@@ -11,7 +11,7 @@ if __name__ == "__main__":
         name = NAME,
         version = "1.0.2",
         author = "facastagnini",
-        author_email = "",
+        author_email = "federico.castagnini@gmail.com",
         url = "https://github.com/facastagnini/zabbix-rsyslog",
         license = 'APL 2.0',
         packages = [NAME],
