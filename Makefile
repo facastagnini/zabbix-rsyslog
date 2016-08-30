@@ -10,7 +10,7 @@ PYTHON = $(which python)
 all: rpms
 
 test:
-	pylint --errors-only --reports=y *.py zabbix_rsyslog/*.py
+	pylint --reports=y *.py zabbix_rsyslog/*.py
 
 clean:
 	rm -rf dist/ build/ rpm-build/ rpms/
