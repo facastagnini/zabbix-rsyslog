@@ -1,3 +1,9 @@
+This is a fork for the creation of an RPM. Basically, run "make" in the directory to build the RPM.
+Install it.
+
+In Zabbix you will still need to import the template and attach it to each rsyslog host. That's about it.
+[I may have forgotten a step; if so I'll add it later.]
+
 zabbix-rsyslog
 ==============
 

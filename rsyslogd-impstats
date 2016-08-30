@@ -1,0 +1,12 @@
+/var/log/rsyslogd-impstats.log {
+  missingok
+  sharedscripts
+  notifempty
+  daily
+  rotate 0
+  size 10M
+  postrotate
+    invoke-rc.d rsyslog rotate > /dev/null
+  endscript
+}
+
