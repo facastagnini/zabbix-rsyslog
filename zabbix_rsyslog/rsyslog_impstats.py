@@ -1,8 +1,5 @@
 #!/usr/bin/python -u
 # -*- coding: utf-8 -*-
-"""
-Send rsyslog impstats output to zabbix
-"""
 
 import os
 import re
@@ -75,8 +72,11 @@ def process_impstats_json():
 
         items_to_send = []
         for key in json_object:
-            items_to_send.append('- rsyslog[{0},{1}] {2}'.format(name, key, json_object[key]))
-        cmd = "echo '{0}' | zabbix_sender -i - -c /etc/zabbix/zabbix_agentd.conf".format('\n'.join(items_to_send))
+            items_to_send.append('- rsyslog[{0},{1}] {2}'.format(name, key, 
+                json_object[key]))
+        cmd = "echo '{0}' | zabbix_sender -i - "
+                "-c /etc/zabbix/zabbix_agentd.conf"
+                .format('\n'.join(items_to_send))
         retvalue = os.system(cmd)
         if debug:
             fd.write("command: %s\n" % (cmd))
@@ -91,8 +91,10 @@ def main():
     debug = False
 
     parser = argparse.ArgumentParser(usage='%(prog)s [--discover queue|action]')
-    parser = argparse.ArgumentParser(description='Helper script to link syslog stats and zabbix.')
-    parser.add_argument("--discover", action="store", help="Discover the rsyslog items in this system")
+    parser = argparse.ArgumentParser(
+                description='Helper script to link syslog stats and zabbix.')
+    parser.add_argument("--discover", action="store", 
+                        help="Discover the rsyslog items in this system")
 
     args = parser.parse_args()
 
