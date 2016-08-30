@@ -1,6 +1,8 @@
 
 TODO: THIS README NEEDS SOME LOVE
 
+[![Build Status](https://travis-ci.org/facastagnini/zabbix-rsyslog.svg)](https://travis-ci.org/facastagnini/zabbix-rsyslog)
+
 This is a fork for the creation of an RPM. Basically, run "make" in the directory to build the RPM.
 Install it.
 
